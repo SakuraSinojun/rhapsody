@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="win32">
+      <UniqueIdentifier>{77216a75-1f4e-467d-90fb-5646521829bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common">
+      <UniqueIdentifier>{6cb85bdb-59fa-4de7-b433-04d80a471130}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="render">
+      <UniqueIdentifier>{0fe5fea4-06ac-482c-9be4-6c5227b5d9d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="script">
+      <UniqueIdentifier>{6c3d43b5-6d13-4f6d-b2ea-0c579c7175a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="input">
+      <UniqueIdentifier>{f293d208-6f8a-4a25-96e4-d42e11ac45b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="control">
+      <UniqueIdentifier>{5c8eb5f8-d29d-4bcf-a202-3300ad369861}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\main.cpp" />
+    <ClCompile Include="..\win32\CWnd.cpp">
+      <Filter>win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\Tools.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\Exception.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\render\Render.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\render\Surface.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\render\Animation.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\win32\CWnd.h">
+      <Filter>win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\Tools.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\Exception.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\type.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\render\Render.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\render\Surface.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\render\Animation.h">
+      <Filter>render</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
