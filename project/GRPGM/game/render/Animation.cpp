@@ -11,9 +11,9 @@ using namespace std;
 
 CAnimation::CAnimation():
         running(false),
-        render(NULL),
         dwFrameInterval(0),
-        dwTrackInterval(0)
+        dwTrackInterval(0),
+        render(NULL)
 {
         iterCurrentSurface = vecSurface.begin();
 

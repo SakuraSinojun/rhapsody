@@ -10,17 +10,17 @@
 CSurface::CSurface():
         nWidth(640),
         nHeight(480),
-        x(0),
-        y(0),
-        imgbuffer(NULL),
-        render(NULL),
-        bShow(false),
-        nAlpha(-1),
-        bColorKey(false),
-        uKeyColor(0),
-        bUseFirstColor(false),
         nSrcLeft(0),
         nSrcTop(0),
+        bColorKey(false),
+        bUseFirstColor(false),
+        uKeyColor(0),
+        nAlpha(-1),
+        bShow(false),
+        imgbuffer(NULL),
+        render(NULL),
+        x(0),
+        y(0),
         ox(0),
         oy(0)
 {
@@ -32,17 +32,19 @@ CSurface::CSurface():
 CSurface::CSurface(int width, int height):
         nWidth(width),
         nHeight(height),
-        x(0),
-        y(0),
+        nSrcLeft(0),
+        nSrcTop(0),
+        bColorKey(false),
+        bUseFirstColor(false),
+        uKeyColor(0),
+        nAlpha(-1),
+        bShow(false),
         imgbuffer(NULL),
         render(NULL),
-        bShow(false),
-        nAlpha(-1),
-        bColorKey(false),
-        uKeyColor(0),
-        bUseFirstColor(false),
-        nSrcLeft(0),
-        nSrcTop(0)
+        x(0),
+        y(0),
+        ox(0),
+        oy(0)
 {
         CRender *       lastRender = CRender::GetLastRender();
         if(lastRender != NULL)
@@ -265,7 +267,7 @@ int     CSurface::CreateEmptyBitmap(void)
 
 int     CSurface::Blt(CSurface * surface)
 {
-        unsigned int    tcolor, color;
+        unsigned int    tcolor = 0, color;
         int             x0, y0;
         int             left, top, right, bottom;
         unsigned char * p0;

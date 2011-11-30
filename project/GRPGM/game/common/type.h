@@ -1,15 +1,15 @@
 
 #pragma once
 
-#include <cstdint>
+// #include <cstdint>
 
 #pragma pack(push)
 #pragma pack(1)
 
-typedef uint8_t         _BYTE;
-typedef uint16_t        _WORD;
-typedef uint32_t        _DWORD;
-typedef int32_t         _LONG;
+typedef unsigned char       _BYTE;
+typedef unsigned short      _WORD;
+typedef unsigned int        _DWORD;
+typedef int                 _LONG;
 
 typedef struct
 {
