@@ -6,21 +6,20 @@ MESSAGE(STATUS "Project Directory: ${PROJECT_SOURCE_DIR}")
 
 set(CMAKE_BUILD_TYPE        DEBUG)
 set(TARGET_NAME             game.exe CACHE STRING "exe name")
-set(PLATFORM                "mingw" CACHE STRING "mingw vc")
+#set(PLATFORM                "mingw" CACHE STRING "mingw vc")
 set(EXECUTABLE_OUTPUT_PATH  ${PROJECT_SOURCE_DIR}/target CACHE STRING "OUTPUT PATH")
 set(LIBRARY_OUTPUT_PATH     ${grpgm_BINARY_DIR}/lib)
 
-list(APPEND CMAKE_MODULE_PATH
-    ${grpgm_SOURCE_DIR}/cmake
-    )
-
-if(PLATFORM STREQUAL    "mingw")
-    MESSAGE(STATUS "MINGW!")
-    include( MinGW )
-else(PLATFORM STREQUAL    "mingw")
-    MESSAGE(STATUS "VC!")
-    include( VC )
-endif(PLATFORM STREQUAL    "mingw")
+#list(APPEND CMAKE_MODULE_PATH
+#    ${grpgm_SOURCE_DIR}/cmake
+#    )
+#if(PLATFORM STREQUAL    "mingw")
+#    MESSAGE(STATUS "MINGW!")
+#    include( MinGW )
+#else(PLATFORM STREQUAL    "mingw")
+#    MESSAGE(STATUS "VC!")
+#    include( VC )
+#endif(PLATFORM STREQUAL    "mingw")
 
 
 add_subdirectory(common)

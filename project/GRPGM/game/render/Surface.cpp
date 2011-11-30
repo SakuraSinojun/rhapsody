@@ -79,7 +79,7 @@ int     CSurface::Load(const unsigned char * imgbuf)
         int     width, height;
         if(imgbuf == NULL)
         {
-                CTools::Get()->Debug("Null Buffer!\n");
+                Debug() << "Null Buffer!" << endl;
                 this->CreateEmptyBitmap();
                 return -1;
         }
@@ -163,7 +163,7 @@ int     CSurface::Load(const unsigned char * imgbuf)
                 memcpy((void *)imgbuffer, (void *)p, biHeader.biSizeImage);
                 break;
         default:
-                CTools::Get()->Debug("Bitmap Not Support. depth:%d\n", nDepth);
+                Debug() << "Bitmap Not Support. depth: " << nDepth <<endl;
                 throw "Bitmap Not Support!";
                 return -1;
                 break;

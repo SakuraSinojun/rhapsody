@@ -51,7 +51,7 @@ void    CRender::Detach(CSurface * surface)
         iter = find(lsSurface.begin(), lsSurface.end(), surface);
         if(iter == lsSurface.end())
         {
-                CTools::Get()->Debug("No Such Surface!\n");
+                Debug() << "No Such Surface!" << endl;
                 //throw("No Such Surface!");
                 return;
         }
@@ -69,7 +69,7 @@ void    CRender::Detach(CAnimation *     ani)
         iter = find(lsAnimation.begin(), lsAnimation.end(), ani);
         if(iter == lsAnimation.end())
         {
-                CTools::Get()->Debug("No Such Animation!\n");
+                Debug() << "No Such Animation!" << endl;
                 //throw("No Such Surface!");
                 return;
         }

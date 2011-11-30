@@ -24,7 +24,7 @@ DWORD WINAPI     CWnd::RedrawProc(LPVOID lpThreadParameter)
         DWORD           id = (DWORD)lpThreadParameter;
         HANDLE          evt;
 
-        CTools::Get()->Debug("main thread id = %u\n", id);
+        Debug() << "main thread id = " << id << endl;
 
         evt = CreateEvent(NULL, 0, 0, TEXT("EVENT_DELAY"));
 
@@ -42,7 +42,7 @@ DWORD WINAPI     CWnd::RedrawProc(LPVOID lpThreadParameter)
                         // CTools::Get()->Debug("dft = %f\n", dft);
                         if(PostThreadMessage(id, WM_PAINT60, 0, 0) == 0)
                         {
-                                CTools::Get()->Debug("PostThreadMessage failed\n");
+                                Debug() << "PostThreadMessage failed" << endl;
                                 ShowLastError();
                         }
                         qt2 = qt1;
@@ -65,7 +65,7 @@ void    CWnd::ShowLastError(void)
         FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER|FORMAT_MESSAGE_FROM_SYSTEM,0, GetLastError(), 
                 MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), //Ä¬ÈÏÓïÑÔ
                 (LPTSTR)&lpMsgBuf, 0, NULL );
-        CTools::Get()->Debug("%s\n", lpMsgBuf);
+        Debug() << lpMsgBuf << endl;
         LocalFree(lpMsgBuf);
 }
 
@@ -126,7 +126,7 @@ void CWnd::Loop(void)
         hRedrawThread = CreateThread(NULL, 0, RedrawProc, (LPVOID)GetCurrentThreadId(), 0, NULL);
         if(hRedrawThread == NULL)
         {
-                CTools::Get()->Debug("CreateThread failed\n");
+                Debug() << "CreateThread failed" << endl;
                 ShowLastError();
         }
 
@@ -231,7 +231,7 @@ void CWnd::OnPaint(void)
         hBitmap = CreateDIBitmap(hdc, (BITMAPINFOHEADER *)&Header, CBM_INIT, buffer, (BITMAPINFO *)&Header, DIB_RGB_COLORS);
         if(hBitmap == NULL)
         {
-                CTools::Get()->Debug("CreateDIBitmap failed\n");
+                Debug() << "CreateDIBitmap failed" << endl;
                 ReleaseDC(hWnd, hdc);
                 ShowLastError();
                 return;

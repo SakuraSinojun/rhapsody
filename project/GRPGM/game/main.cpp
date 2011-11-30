@@ -63,6 +63,8 @@ int main(int argc, char * argv[])
         CWnd *  window = new CWnd();
         window->Create(640, 480, render, control);
 
+        Debug() << "Hello" << endl;
+
         m_render = new CRender(640, 480);
 
         surface1 = new CSurface(640, 480);

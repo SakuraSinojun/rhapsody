@@ -66,13 +66,13 @@ void CAnimation::Start(void)
         running = true;
         dfStartTime = CTools::Get()->CurrentTime();
         dfLastWPTime = CTools::Get()->CurrentTime();
-        CTools::Get()->Debug("Animation started\n");
+        Debug() << "Animation started" << endl;
 }
 
 void CAnimation::Pause(void)
 {
         running = false;
-        CTools::Get()->Debug("Animation paused\n");
+        Debug() << "Animation paused" << endl;
 }
 
 // Í£Ö¹+ÖØÖÃ

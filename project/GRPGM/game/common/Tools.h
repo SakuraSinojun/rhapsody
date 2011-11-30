@@ -5,6 +5,7 @@
 #undef __STRICT_ANSI__
 #include <map>
 #include <string>
+#include <iostream>
 using namespace std;
 
 class CTools
@@ -20,10 +21,11 @@ public:
         const char *            AppPath(void);
 
         double                  CurrentTime(void);
-
 public:
-        void                    Debug(const char * fmt, ...);
-#define Debug(fmt, ...)         DebugPRT(__FILE__, __LINE__, fmt, #__VA_ARGS__)
+        ostream&                OutPRT(const char * file, int line);
+public:
+//        void                    Debug(const char * fmt, ...);
+//#define Debug(fmt, ...)         DebugPRT(__FILE__, __LINE__, fmt, ##__VA_ARGS__)
 
 private:
         CTools();
@@ -33,4 +35,13 @@ private:
         char *                                  apppath;
 
 };
+
+#define Debug()   CTools::Get()->OutPRT(__FILE__, __LINE__)
+
+
+
+
+
+
+
 

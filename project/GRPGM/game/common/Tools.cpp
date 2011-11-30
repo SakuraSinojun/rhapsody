@@ -60,7 +60,7 @@ const unsigned char *  CTools::ReadAsBitmap32(const char * filename)
         std::ifstream   file(filename, ios::in | ios::binary);
         if(file.fail())
         {
-                Debug("No Such File! %s\n", filename);
+                Debug() << "No Such File! " << filename << endl;
                 return NULL;
         }
         file.seekg(0, ios::end);
@@ -69,7 +69,7 @@ const unsigned char *  CTools::ReadAsBitmap32(const char * filename)
         buffer = new unsigned char[static_cast<unsigned int>(len)];
         file.read((char *)buffer, len);
         file.close();
-        Debug("read %s\n", filename);
+        Debug() << "read " << filename << endl;
         bmpMap.insert(map<string, const unsigned char *>::value_type(filename, buffer));
         return buffer;
 }
@@ -79,6 +79,7 @@ const unsigned char *  CTools::ReadAsBitmap24(const char * filename)
         return ReadAsBitmap32(filename);
 }
 
+#if 0
 void CTools::DebugPRT(const char * file, int line, const char * str, ...)
 {
         va_list arglist;
@@ -104,6 +105,16 @@ void CTools::DebugPRT(const char * file, int line, const char * str, ...)
         va_end(arglist);
         
 }
+#undef Debug
+void    CTools::Debug(const char * fmt, ...)
+{
+        va_list arglist;
+        va_start(arglist, fmt);
+        vfprintf(stdout, fmt, arglist);
+        va_end(arglist);
+}
+
+#endif
 
 const char * CTools::AppPath(void)
 {
@@ -127,12 +138,27 @@ double CTools::CurrentTime(void)
         return dft;
 }
 
-#undef Debug
-void    CTools::Debug(const char * fmt, ...)
+ostream&  CTools::OutPRT(const char * file, int line)
 {
-        va_list arglist;
-        va_start(arglist, fmt);
-        vfprintf(stdout, fmt, arglist);
-        va_end(arglist);
+        if(file == NULL)
+        {
+                throw "Debug! NULL string.\n";
+                return cout;
+        }
+        const char *    p = strrchr(file, '\\');
+        if(p == NULL)
+        {
+                p = file;
+        }else{
+                p ++;
+        }
+        time_t  t = time(NULL);
+        struct  tm *    ctm = localtime(&t);
+        
+        printf("[%02d:%02d:%02d] [%s:%05d] ", ctm->tm_hour, ctm->tm_min,
+                ctm->tm_sec, p, line);
+        
+        return cout;
 }
+
 
