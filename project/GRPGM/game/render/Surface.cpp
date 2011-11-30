@@ -4,6 +4,7 @@
 #include "Tools.h"
 #include "Render.h"
 #include <algorithm>
+#include <cstring>
 
 
 CSurface::CSurface():

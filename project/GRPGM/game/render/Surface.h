@@ -6,7 +6,7 @@
 class CRender;
 class CSurface
 {
-        friend  CRender;
+        friend  class CRender;
 public:
         CSurface();
         CSurface(int width, int height);

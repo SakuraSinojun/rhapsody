@@ -2,7 +2,7 @@
 
 
 #pragma once
-
+#undef __STRICT_ANSI__
 #include <map>
 #include <string>
 using namespace std;
@@ -23,7 +23,7 @@ public:
 
 public:
         void                    Debug(const char * fmt, ...);
-#define Debug(fmt, ...)         DebugPRT(__FILE__, __LINE__, fmt, __VA_ARGS__)
+#define Debug(fmt, ...)         DebugPRT(__FILE__, __LINE__, fmt, #__VA_ARGS__)
 
 private:
         CTools();

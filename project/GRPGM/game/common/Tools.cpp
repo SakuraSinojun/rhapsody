@@ -7,11 +7,9 @@
 #include <cstring>
 #include <fstream>
 #include <iostream>
+#include <windows.h>
 
 using namespace std;
-
-
-#include <Windows.h>
 
 
 CTools * CTools::m_instance = NULL;

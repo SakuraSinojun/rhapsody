@@ -6,6 +6,7 @@
 #include "Render.h"
 #include "Surface.h"
 #include "Animation.h"
+#undef __STRICT_ANSI__
 #include <cstdio>
 
 static  CRender *  m_render = NULL;

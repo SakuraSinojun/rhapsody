@@ -4,6 +4,7 @@
 #include "Tools.h"
 #include "Animation.h"
 #include <algorithm>
+#include <cstring>
 using namespace std;
 
 CRender *       CRender::lastRender = NULL;

@@ -1,8 +1,10 @@
 
 
 #include "CWnd.h"
+#undef __STRICT_ANSI__
 #include <vector>
 #include <iostream>
+#include <cstdio>
 #include "Tools.h"
 
 
