@@ -161,7 +161,7 @@ void CWnd::Loop(void)
 
 
 void CWnd::CalcFPS(void)
-{	
+{
         LARGE_INTEGER           litmp;
         LONGLONG                qt1;
         static LONGLONG         qt2 = 0;
@@ -171,22 +171,22 @@ void CWnd::CalcFPS(void)
         char                    FPS[100];
         static LONGLONG         framecount=0;
         double                  fps;
-	
+
         QueryPerformanceFrequency(&litmp);
         dff = (double)litmp.QuadPart;
-	
+
         QueryPerformanceCounter(&litmp);
         qt1 = litmp.QuadPart;
-	
+
         framecount++;
         if(qt2 == 0)
         {
                 qt2 = qt1;
                 return;
         }
-	
+
         dfm = (double)(qt1 - qt2);
-        dft = dfm / dff;	
+        dft = dfm / dff;
         if(dft > 1)
         {
                 fps = framecount / dft;
@@ -213,19 +213,19 @@ void CWnd::OnPaint(void)
         HDC                     memDC;
         struct
         {
-	        BITMAPINFOHEADER		Info;
-	        DWORD				BitField[3];
-        } Header;	
+            BITMAPINFOHEADER    Info;
+            DWORD               BitField[3];
+        } Header;
 
         memcpy(&bmpHeader, &bm, sizeof(BMPHEADER));
         memset(&Header,    0,   sizeof(BITMAPINFO));
         memcpy(&Header,    &bi, sizeof(BMPINFOHEADER));
-	
-        Header.Info.biPlanes		= 1;
-        Header.Info.biCompression	= BI_BITFIELDS;
+
+        Header.Info.biPlanes        = 1;
+        Header.Info.biCompression   = BI_BITFIELDS;
         Header.BitField[0] = 0xff0000;
-	Header.BitField[1] = 0x00ff00;
-	Header.BitField[2] = 0x0000ff;
+        Header.BitField[1] = 0x00ff00;
+        Header.BitField[2] = 0x0000ff;
 
         hdc = GetDC(hWnd);
         hBitmap = CreateDIBitmap(hdc, (BITMAPINFOHEADER *)&Header, CBM_INIT, buffer, (BITMAPINFO *)&Header, DIB_RGB_COLORS);
