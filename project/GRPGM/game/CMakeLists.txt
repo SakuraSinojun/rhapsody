@@ -5,7 +5,7 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 MESSAGE(STATUS "Project Directory: ${PROJECT_SOURCE_DIR}")
 
 set(CMAKE_BUILD_TYPE        DEBUG)
-set(TARGET_NAME             game.exe CACHE STRING "exe name")
+set(TARGET_NAME             game CACHE STRING "exe name")
 #set(PLATFORM                "mingw" CACHE STRING "mingw vc")
 set(EXECUTABLE_OUTPUT_PATH  ${PROJECT_SOURCE_DIR}/target CACHE STRING "OUTPUT PATH")
 set(LIBRARY_OUTPUT_PATH     ${grpgm_BINARY_DIR}/lib)
@@ -22,22 +22,26 @@ set(LIBRARY_OUTPUT_PATH     ${grpgm_BINARY_DIR}/lib)
 #endif(PLATFORM STREQUAL    "mingw")
 
 
-add_subdirectory(common)
-add_subdirectory(win32)
-add_subdirectory(render)
+#add_subdirectory(common)
+#add_subdirectory(win32)
+#add_subdirectory(render)
 
 aux_source_directory( . DIR_MAIN_SRCS)
+aux_source_directory(common DIR_COMMON_SRCS)
+aux_source_directory(render DIR_RENDER_SRCS)
+aux_source_directory(win32 DIR_WIN32_SRCS)
 
-link_directories(
-    ${LIBRARY_OUTPUT_PATH}
-    )
-
-add_executable(${TARGET_NAME}  ${DIR_MAIN_SRCS})
+add_executable(${TARGET_NAME}  
+	${DIR_MAIN_SRCS}
+	${DIR_RENDER_SRCS}
+	${DIR_COMMON_SRCS}
+	${DIR_WIN32_SRCS}
+	)
 
 target_link_libraries(${TARGET_NAME}
-    win32
-    common
-    render
+    kernel32
+    gdi32
+    user32
     )
 
 include_directories(        
