@@ -26,8 +26,6 @@
 
 void NOFF Trace_Out(void);
 static void NOFF log_printf(const char * file, int line, const char * func, const char * fmt, ...);
-static void NOFF handle_sig(int sig, siginfo_t * info, void * arg);
-static void NOFF sighandler(int sig);
 static int              log_level   = 0;
 static int              inited      = 0;
 static pthread_mutex_t  ffmutex;
@@ -65,14 +63,6 @@ static void NOFF init(void)
     memset(&nodes, 0, sizeof(nodes));
     PRINTF("INIT FF!\n");
 
-
-    struct  sigaction   sa;
-    sa.sa_flags     = SA_SIGINFO;
-    sa.sa_handler   = SIG_DFL;
-    sa.sa_sigaction = handle_sig;
-    sigaction(SIGSEGV, &sa, 0);
-    signal(SIGINT, sighandler);
-
 }
 
 static void NOFF log_printf(const char * file, int line, const char * func, const char * fmt, ...)
@@ -106,6 +96,7 @@ static void NOFF log_printf(const char * file, int line, const char * func, cons
 
 static void NOFF add_node(int threadid, void * func, void * call_site) 
 {
+    PRINTF("threadid = %ld, func = %p, call_site = %p\n", threadid, func, call_site);
     int     i;
     int     index = -1;
     for(i = 0; i < MAX_TRACE_THREADS; i ++)
@@ -153,6 +144,7 @@ static void NOFF add_node(int threadid, void * func, void * call_site)
 
 static void NOFF del_node(int threadid, void * func, void * call_site) 
 {
+    PRINTF("threadid = %ld, func = %p, call_site = %p\n", threadid, func, call_site);
     int     i;
     for(i = 0; i < MAX_TRACE_THREADS; i ++)
     {
@@ -223,7 +215,7 @@ void NOFF Trace_Out(void)
 void NOFF __cyg_profile_func_enter(void * this_func, void * call_site) 
 {
     if(!inited) init();
-    PRINTF("func = %p, callsite = %p\n", this_func, call_site);
+//    PRINTF("func = %p, callsite = %p\n", this_func, call_site);
     pthread_mutex_lock(&ffmutex);
     int tid = GETTID();
     add_node(tid, this_func, call_site);
@@ -233,7 +225,7 @@ void NOFF __cyg_profile_func_enter(void * this_func, void * call_site)
 void NOFF __cyg_profile_func_exit(void * this_func, void * call_site)
 {
     if(!inited) init();
-    PRINTF("func = %p, callsite = %p\n", this_func, call_site);
+//   PRINTF("func = %p, callsite = %p\n", this_func, call_site);
     int tid = GETTID();
     pthread_mutex_lock(&ffmutex);
     del_node(tid, this_func, call_site);
@@ -247,11 +239,24 @@ static void NOFF handle_sig(int sig, siginfo_t * info, void * arg)
     exit(0);
 }
 
+/*
 static void NOFF sighandler(int sig)
 {
     printf("Get signal %d\n", sig);
     Trace_Out();
     exit(0);
+}
+*/
+
+void ff_trace_signal(int sig)
+{
+    struct  sigaction   sa;
+    sa.sa_flags     = SA_SIGINFO;
+    sa.sa_handler   = SIG_DFL;
+    sa.sa_sigaction = handle_sig;
+    sigaction(sig, &sa, 0);
+//    sigaction(SIGSEGV, &sa, 0);
+//    signal(SIGINT, sighandler);
 }
 
 #if 0
