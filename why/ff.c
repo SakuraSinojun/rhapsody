@@ -216,7 +216,7 @@ static void NOFF sighandler(int sig)
 #endif
 
 
-const char *    addr2func(void * addr)
+const char * NOFF   addr2func(void * addr)
 {
     if(addr == NULL)
         return NULL;
