@@ -223,9 +223,9 @@ void CWnd::OnPaint(void)
 
         Header.Info.biPlanes        = 1;
         Header.Info.biCompression   = BI_BITFIELDS;
-        Header.BitField[0] = 0xff0000;
-        Header.BitField[1] = 0x00ff00;
-        Header.BitField[2] = 0x0000ff;
+        Header.BitField[0]          = 0xff0000;
+        Header.BitField[1]          = 0x00ff00;
+        Header.BitField[2]          = 0x0000ff;
 
         hdc = GetDC(hWnd);
         hBitmap = CreateDIBitmap(hdc, (BITMAPINFOHEADER *)&Header, CBM_INIT, buffer, (BITMAPINFO *)&Header, DIB_RGB_COLORS);
